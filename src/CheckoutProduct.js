@@ -1,6 +1,8 @@
 import React from 'react'
 import { useStateValue } from './StateProvider'
 import './CheckoutProduct.css'
+import Fade from 'react-reveal/Fade';
+
 export const CheckoutProduct = ({id,title,price,rating,image}) => {
     const [{basket},dispatch] = useStateValue()
     const removeToBasket = ()=>{
@@ -14,6 +16,9 @@ export const CheckoutProduct = ({id,title,price,rating,image}) => {
 
 
     return (
+        <Fade bottom>
+
+
         <div className="checkoutProduct">
             {rating>=4 && <span className="checkoutProduct_bestSeller">Best Seller</span>}
             <div className="checkoutProduct_image">
@@ -35,5 +40,6 @@ export const CheckoutProduct = ({id,title,price,rating,image}) => {
                 <button onClick={removeToBasket}>Remove to Basket</button>
             </div>
         </div>
+        </Fade>
     )
 }

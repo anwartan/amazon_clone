@@ -3,8 +3,12 @@ import './Checkout.css'
 import { Subtotal } from './Subtotal'
 import { useStateValue } from './StateProvider'
 import { CheckoutProduct } from './CheckoutProduct'
+import FlipMove from 'react-flip-move';
+
+
+
 export const Checkout = () => {
-    const [{basket},dispatch] = useStateValue()
+    const [{basket,user},dispatch] = useStateValue()
     
     const countTotal = (basket)=>{
         if(basket.length!==0){
@@ -23,10 +27,15 @@ export const Checkout = () => {
             <div className="checkout_left">
                 <img alt="" className="checkout_ad" src="https://images-na.ssl-images-amazon.com/images/G/02/UK_CCMP/TM/OCC_Amazon1._CB423492668_.jpg?fbclid=IwAR3pn_BOSK4yOxdwM757A7S_kuDIenGRoQgN-FOh6ValmstJMQO8zYprOGc"></img>
                 <div>
+                     <h3>Hello, {user?.email}</h3>
                     <h2 className="checkout_title">Your Shopping Basket</h2>
-                    <div>
+                    <div >
+                        <FlipMove  enterAnimation="accordionVertical" leaveAnimation="accordionVertical" typeName={null}>
+                      
                         {
-                            basket.map(item=>(
+                        basket.map(item=>(
+                            <div>
+
                                 <CheckoutProduct
                                 key={item.id}
                                 title={item.title}
@@ -34,10 +43,11 @@ export const Checkout = () => {
                                 price={item.price}
                                 rating={item.rating}
                                 id={item.id}
-                                ></CheckoutProduct>
-
+                                ></CheckoutProduct>                                
+                            </div>
                             ))
                         }
+                        </FlipMove>
                     </div>
                 </div>
             </div>
